@@ -11,9 +11,9 @@ a.
 
 b.
    1. Global EC creation:
-   outer: null, this: window, LE:[{}], TDZ{ str, user }
+   outer: null, this: window, LE:[{ show: undefined }], TDZ{ str, user }
    2.Global EC execution:
-   outer: null, this: window, LE:[{ str: "Greetings, ", user: obj }], TDZ{}
+   outer: null, this: window, LE:[{ show: fn str: "Greetings, ", user: obj }], TDZ{}
 
    3.display FEC creation:
    outer: global, this: user, LE:[{ arguments: obj }], TDZ{}
