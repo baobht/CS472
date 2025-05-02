@@ -1,3 +1,4 @@
+"use strict";
 let group = {
   title: "Our Group",
   students: ["John", "Pete", "Alice"],
