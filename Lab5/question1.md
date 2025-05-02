@@ -21,9 +21,9 @@ b.
    outer: global, this: user, LE:[{ arguments: obj }], TDZ{}
 
    5.show FEC creation:
-   outer: global, this: undefined, LE:[{ arguments: obj, msg: "hi" }], TDZ{msg}
+   outer: global, this: window, LE:[{ arguments: obj, msg: "hi" }], TDZ{msg}
    6.show FEC execution:
-   outer: global, this: undefined, LE:[{ arguments: obj, msg: "hi" }], TDZ{}
+   outer: global, this: window, LE:[{ arguments: obj, msg: "hi" }], TDZ{}
 
    7.show FEC creation:
    outer: global, this: user, LE:[{ arguments: obj, msg: "hello" }], TDZ{}
