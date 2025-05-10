@@ -26,7 +26,7 @@ Outer: global, LE: [{ f: fn, x: 10, arguments: obj, a:8, b: 9, c: 10 }], TDZ{}
 5. f EC creation:
 Outer: c, LE: [{ arguments: obj, a: 8, b: 9, c: 10, x: undefined }]
 6. f EC execution:
-Outer: c, LE: [{ arguments: obj, a: 8, b: 10, c: 10, x: 10 }]
+Outer: c, LE: [{ arguments: obj, a: 8, b: 10, c: 10, x: 5 }]
 ```
 
 Code 2:
