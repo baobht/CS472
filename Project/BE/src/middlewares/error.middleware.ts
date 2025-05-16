@@ -7,7 +7,8 @@ const errorHandler = (
   res: Response,
   next: NextFunction
 ): void => {
-  console.error(err.stack);
+  console.error("🚀 ~ err.stack:", err.stack);
+
   if (err instanceof MongoServerError && err.code === 11000) {
     const field = Object.keys(err.keyValue)[0];
     res.status(400).json({

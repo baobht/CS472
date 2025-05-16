@@ -16,6 +16,7 @@ const validate =
       req.validatedBody = schema.parse(req.body);
       next();
     } catch (error: any) {
+      console.log(error);
       res.status(400).json({ message: error.errors });
     }
   };
