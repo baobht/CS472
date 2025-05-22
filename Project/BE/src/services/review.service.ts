@@ -15,7 +15,7 @@ interface UpdateReviewInput {
 const getAllReviewsByProductID = async (
   productId: string
 ): Promise<IReview[]> => {
-  return await Review.find();
+  return await Review.find({ productId });
 };
 
 const addReview = async ({

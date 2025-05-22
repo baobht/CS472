@@ -25,6 +25,10 @@ const options: swaggerJsdoc.Options = {
             price: { type: "number", example: 99.99 },
             dateAdded: { type: "string", format: "date-time" },
             averageRating: { type: "number", example: 4.5 },
+            imageUrl: {
+              type: "string",
+              example: "https://example.com/image.jpg",
+            },
           },
         },
         ProductInput: {
@@ -48,6 +52,10 @@ const options: swaggerJsdoc.Options = {
             category: {
               type: "string",
               example: "Electronics",
+            },
+            imageUrl: {
+              type: "string",
+              example: "https://example.com/image.jpg",
             },
           },
         },

@@ -4,8 +4,25 @@ import productService from "../services/product.service";
 
 const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const products = await productService.getAllProducts();
-    res.json({ data: products });
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const category = req.query.category as string | undefined;
+    const q = req.query.q as string | undefined; // <-- get q param
+    const { products, total } = await productService.getAllProducts(
+      page,
+      limit,
+      category,
+      q
+    );
+    res.json({
+      data: products,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (error) {
     logger.error("Error getting all products", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -28,12 +45,13 @@ const getProductById = async (req: Request, res: Response): Promise<void> => {
 
 const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, price, description, category } = req.body;
+    const { name, price, description, category, imageUrl } = req.body;
     const product = await productService.createProduct({
       name,
       price,
       description,
       category,
+      imageUrl,
     });
     logger.info("Product created: %s", product.name);
     res.status(201).json({ data: product });
@@ -46,12 +64,15 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { productId } = req.params;
-    const { name, price, description, category } = req.body;
+    const { name, price, description, category, imageUrl, averageRating } =
+      req.body;
     const updateProduct = {
       name,
       price,
       description,
       category,
+      imageUrl,
+      averageRating,
     };
     const product = await productService.updateProduct(
       productId,

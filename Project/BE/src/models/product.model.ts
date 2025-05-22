@@ -7,6 +7,7 @@ export interface IProduct extends Document {
   price: number;
   dateAdded: Date;
   averageRating: number;
+  imageUrl?: string;
 }
 
 const ProductSchema = new Schema<IProduct>({
@@ -31,6 +32,9 @@ const ProductSchema = new Schema<IProduct>({
   averageRating: {
     type: Number,
     default: 0,
+  },
+  imageUrl: {
+    type: String,
   },
 });
 

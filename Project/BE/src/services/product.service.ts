@@ -5,6 +5,7 @@ interface CreateProductInput {
   price: number;
   description?: string;
   category?: string;
+  imageUrl?: string;
 }
 
 interface UpdateProductInput {
@@ -12,10 +13,25 @@ interface UpdateProductInput {
   description?: string;
   category?: string;
   price?: number;
+  imageUrl?: string;
 }
 
-const getAllProducts = async (): Promise<IProduct[]> => {
-  return await Product.find();
+const getAllProducts = async (
+  page: number = 1,
+  limit: number = 10,
+  category?: string,
+  q?: string
+): Promise<{ products: IProduct[]; total: number }> => {
+  const skip = (page - 1) * limit;
+  const filter: any = {};
+  if (category) filter.category = category;
+  if (q) filter.name = { $regex: q, $options: "i" }; // <-- search by name, case-insensitive
+
+  const [products, total] = await Promise.all([
+    Product.find(filter).skip(skip).limit(limit),
+    Product.countDocuments(filter),
+  ]);
+  return { products, total };
 };
 
 const getProductById = async (id: string): Promise<IProduct | null> => {

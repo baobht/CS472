@@ -24,6 +24,32 @@ const productRoutes = Router();
  *               items:
  *                 $ref: '#/components/schemas/Product'
  */
+// productRoutes.get("/", productController.getAllProducts);
+
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     summary: Get products which name match with the query
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - name: query
+ *         in: path
+ *         required: true
+ *         description: Name of the product
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: List of products match
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ */
 productRoutes.get("/", productController.getAllProducts);
 
 /**
@@ -107,11 +133,7 @@ productRoutes.post(
  *             schema:
  *               $ref: '#/components/schemas/Product'
  */
-productRoutes.post(
-  "/:productId",
-  validate(createProductSchema),
-  productController.updateProduct
-);
+productRoutes.post("/:productId", productController.updateProduct);
 
 /**
  * @swagger
